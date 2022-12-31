@@ -538,16 +538,17 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
                         ?.call(day, widget.locale) ??
                     DateFormat.E(widget.locale).format(day);
 
-                final isWeekend =
-                    _isWeekend(day, weekendDays: widget.weekendDays);
+                final weekdayKind = _getWeekdayKind(day);
 
                 dowCell = Center(
                   child: ExcludeSemantics(
                     child: Text(
                       weekdayString,
-                      style: isWeekend
-                          ? widget.daysOfWeekStyle.weekendStyle
-                          : widget.daysOfWeekStyle.weekdayStyle,
+                      style: weekdayKind == DayOfWeekKind.saturday
+                          ? widget.daysOfWeekStyle.saturdayStyle
+                          : weekdayKind == DayOfWeekKind.sunday
+                              ? widget.daysOfWeekStyle.sundayStyle
+                              : widget.daysOfWeekStyle.weekdayStyle,
                     ),
                   ),
                 );
@@ -617,7 +618,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
         final isToday = isSameDay(day, widget.currentDay);
         final isDisabled = _isDayDisabled(day);
-        final isWeekend = _isWeekend(day, weekendDays: widget.weekendDays);
+        final weekdayKind = _getWeekdayKind(day);
 
         Widget content = CellContent(
           key: ValueKey('CellContent-${day.year}-${day.month}-${day.day}'),
@@ -633,7 +634,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
           isWithinRange: isWithinRange,
           isOutside: isOutside,
           isDisabled: isDisabled,
-          isWeekend: isWeekend,
+          weekdayKind: weekdayKind,
           isHoliday: widget.holidayPredicate?.call(day) ?? false,
           locale: widget.locale,
         );
@@ -771,10 +772,17 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
-  bool _isWeekend(
-    DateTime day, {
-    List<int> weekendDays = const [DateTime.saturday, DateTime.sunday],
-  }) {
-    return weekendDays.contains(day.weekday);
+  DayOfWeekKind _getWeekdayKind(
+    DateTime day,
+  ) {
+    if (day.weekday == DateTime.saturday) {
+      return DayOfWeekKind.saturday;
+    }
+
+    if (day.weekday == DateTime.sunday) {
+      return DayOfWeekKind.sunday;
+    }
+
+    return DayOfWeekKind.weekday;
   }
 }

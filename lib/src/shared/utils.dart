@@ -20,6 +20,8 @@ enum AvailableGestures { none, verticalSwipe, horizontalSwipe, all }
 /// Formats that the calendar can display.
 enum CalendarFormat { month, twoWeeks, week }
 
+enum DayOfWeekKind { weekday, saturday, sunday }
+
 /// Days of the week that the calendar can start with.
 enum StartingDayOfWeek {
   monday,

@@ -23,14 +23,24 @@ class DaysOfWeekStyle {
   /// Style for weekdays on the top of calendar.
   final TextStyle weekdayStyle;
 
-  /// Style for weekend days on the top of calendar.
-  final TextStyle weekendStyle;
+  /// Style for saturday on the top of calendar.
+  final TextStyle saturdayStyle;
+
+  /// Style for sunday on the top of calendar.
+  final TextStyle sundayStyle;
 
   /// Creates a `DaysOfWeekStyle` used by `TableCalendar` widget.
   const DaysOfWeekStyle({
     this.dowTextFormatter,
     this.decoration = const BoxDecoration(),
-    this.weekdayStyle = const TextStyle(color: const Color(0xFF4F4F4F)),
-    this.weekendStyle = const TextStyle(color: const Color(0xFF6A6A6A)),
+    this.weekdayStyle = const TextStyle(
+      color: const Color(0xFF4F4F4F),
+    ),
+    this.saturdayStyle = const TextStyle(
+      color: const Color(0xFF6A6A6A),
+    ),
+    this.sundayStyle = const TextStyle(
+      color: const Color(0xFF6A6A6A),
+    ),
   });
 }
