@@ -158,22 +158,22 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
       _pageCallbackDisabled = true;
     }
 
-    if (shouldAnimate && widget.pageAnimationEnabled) {
-      if ((currentIndex - _previousIndex).abs() > 1) {
-        final jumpIndex =
-            currentIndex > _previousIndex ? currentIndex - 1 : currentIndex + 1;
+    // if (shouldAnimate && widget.pageAnimationEnabled) {
+    //   if ((currentIndex - _previousIndex).abs() > 1) {
+    //     final jumpIndex =
+    //         currentIndex > _previousIndex ? currentIndex - 1 : currentIndex + 1;
 
-        _pageController.jumpToPage(jumpIndex);
-      }
+    //     _pageController.jumpToPage(jumpIndex);
+    //   }
 
-      _pageController.animateToPage(
-        currentIndex,
-        duration: widget.pageAnimationDuration,
-        curve: widget.pageAnimationCurve,
-      );
-    } else {
-      _pageController.jumpToPage(currentIndex);
-    }
+    //   _pageController.animateToPage(
+    //     currentIndex,
+    //     duration: widget.pageAnimationDuration,
+    //     curve: widget.pageAnimationCurve,
+    //   );
+    // } else {
+    //   _pageController.jumpToPage(currentIndex);
+    // }
 
     _previousIndex = currentIndex;
     final rowCount = _getRowCount(widget.calendarFormat, _focusedDay);
